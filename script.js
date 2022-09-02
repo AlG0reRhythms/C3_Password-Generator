@@ -1,10 +1,18 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-function randoInt {
-  return Math.floor(Math.random()*10);
+function randomInt(min, max){
+  if (!max) {
+    max = min
+    min = 0
+}
+  var rando = Math.random()
+  return Math.floor(min + (1-rando)+rando*max);
 }
 
+function getRandomItem(list){
+  return list[randomInt(list.length)]
+}
 
 function generatePassword() {
   
@@ -26,19 +34,27 @@ function generatePassword() {
   var symbolForcedChoice = window.confirm("Do you want your password to contain special characters?");
 
   var lowerAlphaList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-  var upperAlphaList = []
+  var upperAlphaList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   var numList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
   var symbolList = ["!", "#", "$", "%", "&", "'", "(", "*", "+",",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"]
 
   //now we can create an amalgamated array of all the different declared arrays. This will allow us to randomly pull a character from a ranmdom array x amount of times, where x = desired charcter length
 
+
+
   var userSelectedCriteria = []
 
+
+  // //for loop to iterate .toUpper over lowerAlphaList array
   for (var i = 0; i < lowerAlphaList.length; i++) {
     upperAlphaList[i] = lowerAlphaList[i].toUpperCase()
   }
 
+  console.log(lowerAlphaList);
+  console.log(upperAlphaList);
+  
   //now that the amalgamated array has been declared, we need to find a way to log them in 
+  
   if (lowerForcedChoice === true) {
     userSelectedCriteria.push(lowerAlphaList);
   }
@@ -53,26 +69,27 @@ function generatePassword() {
 
   if (symbolForcedChoice === true) {
     userSelectedCriteria.push(symbolList)
-  } 
-
-  var randomizedPassword = ""
-
-  for (var i = 0; i < passwordLength.length i++) {
-    var randomList = optionsCart[randoInt(0, userSelectedCriteria.length)]
   }
-  
 
-
-
-  //error message if the user for whatever reason decides to decline the addition of all the above vars
-  if (!lowerForcedChoice && !upperForcedChoice && !numForcedChoice && !symbolForcedChoice){ 
+  if (!lowerForcedChoice && !upperForcedChoice && !numForcedChoice && !symbolForcedChoice){
     window.alert('You need to confirm the addition of at least one variable type, ya dingus!');
     return
   }
 
-}
-// if numForcedChoice === true {
+  // declaration and for loop for generation of password
+  var randomizedPassword = []
 
+    for (var i = 0; i < passwordLength - 1; i++) {
+      var randomList = getRandomItem(userSelectedCriteria)
+      var randomListItem = getRandomItem(randomList)
+      randomizedPassword += randomListItem
+  }
+
+  console.log(passwordLength)
+  console.log(randomizedPassword)
+  return randomizedPassword
+
+}
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
