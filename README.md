@@ -14,7 +14,7 @@
 
 ## Usage
 
-![]assets/Generator.png
+![](assets/Generator.png)
 
 - The user will be presented with a landing page, in which they will find a container with a button labeled "Generate Password". Once the user clicks the button they will be presented with a window prompt, asking them to insert the desired amount of characters in their password, from 8 to 128. After, the user will be presented with four different confirmation windows containing prompts, confirming the inclusion of character case, numbers, and special characters.
 
